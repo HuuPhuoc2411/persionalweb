@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://huuphuoc.cloud/</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- ===== RESOURCES ===== -->
+    <url>
+        <loc>https://huuphuoc.cloud/resource-arduino-guide.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/resource-esp32-feature28.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/resource-wincam-cnc.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/resource-msp430-basic.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/resource-ml-microcontrollers.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/resource-yolov10-area-detection.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- ===== PUBLICATIONS ===== -->
+    <url>
+        <loc>https://huuphuoc.cloud/publication-jackfruit-maturity-classification.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/publication-aiot-power-corridor-detection.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/publication-durian-maturity-classification.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/publication-fruit-quality-assessment.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/publication-watermelon-quality-grading.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/publication-durian-ripeness-vcca.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://huuphuoc.cloud/publication-laser-lora-safety-warning.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+        <url>
+
+        <loc>https://huuphuoc.cloud/gioi-thieu.html</loc>
+        <lastmod>2026-04-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+</urlset>
