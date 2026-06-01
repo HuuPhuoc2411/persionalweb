@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Ứng dụng hẹn giờ ngồi thiền bằng tiếng Việt, có nhắc mốc thời gian bằng giọng nói và cài đặt số lần lặp lời nhắc.">
+<meta name="keywords" content="thiền định, hẹn giờ thiền, ngồi thiền, nhắc thiền, mindfulness, meditation timer, tiếng Việt">
+<meta name="author" content="Thiền Định">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#07130f">
+<meta name="color-scheme" content="dark">
+<meta name="application-name" content="Thiền Định">
+<meta name="apple-mobile-web-app-title" content="Thiền Định">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thiền Định">
+<meta property="og:title" content="Thiền Định - Hẹn giờ ngồi thiền có giọng nói">
+<meta property="og:description" content="Hẹn giờ ngồi thiền thân thiện cho người lớn tuổi, có mốc nhắc bằng giọng nói tiếng Việt và tùy chọn lặp lời nhắc.">
+<meta property="og:image" content="icon.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+<meta property="og:image:alt" content="Biểu tượng Thiền Định">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thiền Định - Hẹn giờ ngồi thiền có giọng nói">
+<meta name="twitter:description" content="Ứng dụng hẹn giờ ngồi thiền bằng tiếng Việt, có nhắc mốc thời gian bằng giọng nói.">
+<meta name="twitter:image" content="icon.jpg">
+<link rel="icon" type="image/jpeg" href="icon.jpg">
+<link rel="apple-touch-icon" href="icon.jpg">
+<link rel="image_src" href="icon.jpg">
+<title>Thiền Định - Hẹn giờ ngồi thiền có giọng nói</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Thiền Định",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Any",
+  "inLanguage": "vi-VN",
+  "description": "Ứng dụng hẹn giờ ngồi thiền bằng tiếng Việt, có nhắc mốc thời gian bằng giọng nói và cài đặt số lần lặp lời nhắc.",
+  "image": "icon.jpg"
+}
+</script>
+<style>
+:root{
+  --bg:#07130f;
+  --card:#111d1a;
+  --input:#0b1512;
+  --soft:#152922;
+  --text:#f0fff8;
+  --muted:#b8d6ca;
+  --line:#315447;
+  --soft-line:#3f7564;
+  --progress-track:#20342d;
+  --focus:rgba(105,217,183,.34);
+  --shadow:rgba(0,0,0,.48);
+  --glow-green:rgba(74,222,166,.28);
+  --glow-blue:rgba(92,188,255,.2);
+  --blue:#4f9ee8;
+  --green:#39b97a;
+  --orange:#d59a3a;
+  --red:#d95e68;
+  --gray:#617169;
+}
+*{box-sizing:border-box}
+body{
+  min-height:100vh;
+  font-family:Arial,"Helvetica Neue",sans-serif;
+  background:
+    linear-gradient(140deg,#06110d 0%,#0e1e1a 34%,#101827 68%,#1c1710 100%);
+  color:var(--text);
+  margin:0;
+  padding:10px;
+  font-size:18px;
+}
+.container{
+  max-width:920px;
+  margin:auto;
+  background:
+    linear-gradient(160deg,rgba(22,39,34,.96) 0%,rgba(15,30,27,.96) 52%,rgba(19,28,43,.96) 100%);
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(100,190,162,.26);
+  box-shadow:0 10px 28px var(--shadow),0 0 28px var(--glow-green);
+}
+h1{
+  text-align:center;
+  margin:0;
+  font-size:34px;
+}
+.app-header{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+.meditation-icons{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+}
+.meditation-icons span{
+  width:34px;
+  height:34px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid var(--soft-line);
+  border-radius:50%;
+  background:linear-gradient(145deg,#172f27,#12211d);
+  box-shadow:0 0 14px var(--glow-green);
+  font-size:20px;
+}
+.settings-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+.setting-block{
+  min-width:0;
+}
+.input-with-ok{
+  display:grid;
+  grid-template-columns:1fr 72px;
+  gap:8px;
+  align-items:center;
+}
+label{
+  font-weight:bold;
+  display:block;
+  margin:8px 0 5px;
+  font-size:18px;
+}
+input{
+  width:100%;
+  padding:9px 11px;
+  font-size:22px;
+  border:2px solid var(--line);
+  border-radius:10px;
+  background:linear-gradient(180deg,#0d1915,#09110f);
+  color:var(--text);
+  caret-color:var(--text);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);
+}
+input::placeholder{color:#84928a}
+input:focus,button:focus{
+  outline:4px solid var(--focus);
+  outline-offset:2px;
+}
+.hint{
+  color:var(--muted);
+  font-size:18px;
+  margin:8px 0 0;
+  line-height:1.45;
+}
+.reminder{
+  display:grid;
+  grid-template-columns:1fr 72px 96px;
+  gap:8px;
+  margin-top:8px;
+}
+.reminder-head{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:end;
+  margin-top:4px;
+}
+.repeat-setting{
+  display:grid;
+  grid-template-columns:70px 1fr 70px;
+  gap:8px;
+  align-items:center;
+}
+.repeat-setting input{
+  text-align:center;
+  font-size:26px;
+  font-weight:bold;
+}
+button{
+  min-height:46px;
+  padding:9px 12px;
+  border:none;
+  border-radius:10px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:active{transform:translateY(1px)}
+.green{background:linear-gradient(135deg,#2fa66c,#5bd397);color:#06110d;box-shadow:0 0 14px rgba(69,211,143,.24)}
+.orange{background:linear-gradient(135deg,#b87424,#e1ad4b);color:#140d05}
+.red{background:linear-gradient(135deg,#bc4652,#e36d75);color:#fff}
+.gray{background:linear-gradient(135deg,#50635a,#708178);color:#fff}
+.primary{background:linear-gradient(135deg,#357fd0,#6ec8ff);color:#06111c;box-shadow:0 0 14px var(--glow-blue)}
+.ok-button{color:#06110d}
+.full{width:100%;margin-top:8px}
+.voice-row{
+  display:grid;
+  grid-template-columns:minmax(240px,330px) 1fr;
+  gap:10px;
+  align-items:stretch;
+  margin-top:10px;
+}
+.speed-control{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  align-items:center;
+  margin-top:8px;
+}
+.speed-control input{
+  padding:0;
+  accent-color:#5bd397;
+}
+.speed-value{
+  min-width:62px;
+  text-align:center;
+  color:var(--text);
+  font-weight:bold;
+}
+.timer{
+  text-align:center;
+  font-size:50px;
+  font-weight:bold;
+  margin-top:10px;
+  font-variant-numeric:tabular-nums;
+}
+.progress{
+  height:22px;
+  background:var(--progress-track);
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:8px;
+}
+.bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#4adea6,#78c7ff,#d7b85b);
+  box-shadow:0 0 16px rgba(74,222,166,.42);
+  transition:width .2s linear;
+}
+.info{
+  text-align:center;
+  font-size:18px;
+  margin-top:6px;
+  line-height:1.3;
+}
+.controls{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:10px;
+}
+.status{
+  text-align:center;
+  font-size:19px;
+  font-weight:bold;
+  margin-top:8px;
+  min-height:24px;
+}
+.voice-note{
+  background:linear-gradient(145deg,#142820,#18263a);
+  border:2px solid var(--soft-line);
+  border-radius:10px;
+  padding:9px 10px;
+  margin-top:0;
+  color:var(--muted);
+  box-shadow:0 0 14px rgba(74,222,166,.12);
+  font-size:16px;
+  line-height:1.3;
+}
+.message-settings{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+.button-icon{
+  display:inline-block;
+  min-width:26px;
+  margin-right:6px;
+}
+@media (max-width:560px){
+  body{padding:6px;font-size:16px}
+  .container{padding:10px;border-radius:10px}
+  h1{font-size:27px}
+  .app-header{gap:8px;margin-bottom:6px}
+  .meditation-icons span{width:29px;height:29px;font-size:17px}
+  label{font-size:16px;margin:6px 0 4px}
+  input{padding:7px 9px;font-size:20px}
+  button{min-height:42px;font-size:16px;padding:7px 9px}
+  .timer{font-size:38px;margin-top:8px}
+  .settings-grid,.voice-row,.message-settings{grid-template-columns:1fr}
+  .speed-control{grid-template-columns:1fr 54px}
+  .controls{grid-template-columns:1fr 1fr}
+  .input-with-ok{grid-template-columns:1fr 58px}
+  .reminder{grid-template-columns:1fr 58px 72px}
+  .repeat-setting{grid-template-columns:54px 1fr 54px}
+  .voice-note{font-size:14px;padding:7px 8px}
+  button{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<header class="app-header">
+  <div class="meditation-icons" aria-label="Biểu tượng thiền định">
+    <span title="Ngồi thiền">🧘</span>
+    <span title="Hoa sen">🪷</span>
+    <span title="Chuông nhắc">🔔</span>
+  </div>
+  <h1>Thiền Định</h1>
+</header>
+
+<div class="settings-grid">
+  <div class="setting-block">
+    <label for="totalTime">Tổng thời gian ngồi thiền (phút)</label>
+    <div class="input-with-ok">
+      <input id="totalTime" type="number" min="1" step="1" value="30" inputmode="decimal">
+      <button class="green ok-button" type="button" onclick="closeKeyboard()">OK</button>
+    </div>
+  </div>
+</div>
+
+<div class="reminder-head">
+  <label>Các mốc nhắc</label>
+  <button class="primary" type="button" onclick="addReminder()"><span class="button-icon" aria-hidden="true">+</span>Thêm</button>
+</div>
+<div id="reminders"></div>
+
+<div class="setting-block">
+  <label for="repeatCount">Số lần đọc mỗi lời nhắc</label>
+  <div class="repeat-setting" aria-label="Cài đặt số lần đọc lời nhắc">
+    <button class="gray" type="button" onclick="changeRepeatCount(-1)" aria-label="Giảm số lần đọc">−</button>
+    <input id="repeatCount" type="number" min="1" max="5" step="1" value="1" inputmode="numeric" onchange="normalizeRepeatCount()">
+    <button class="gray" type="button" onclick="changeRepeatCount(1)" aria-label="Tăng số lần đọc">+</button>
+  </div>
+</div>
+
+<div class="voice-row">
+  <button class="gray" type="button" onclick="testVoice()"><span class="button-icon" aria-hidden="true">🔊</span>Nghe thử giọng nói</button>
+  <div class="voice-note" id="voiceNote">Đang tải giọng nói tiếng Việt. Trang sẽ tự chuẩn bị sẵn khi mở.</div>
+</div>
+
+<label for="voiceRate">Tốc độ giọng nói</label>
+<div class="speed-control">
+  <input id="voiceRate" type="range" min="0.2" max="1.5" step="0.05" value="0.82" oninput="updateVoiceRate()">
+  <div class="speed-value" id="voiceRateValue">0.82x</div>
+</div>
+
+<div class="timer" id="timer">00:00:00</div>
+
+<div class="progress" aria-hidden="true">
+<div class="bar" id="bar"></div>
+</div>
+
+<div class="info" id="info">
+Đã qua: 0 phút<br>
+Còn lại: 0 phút
+</div>
+
+<div class="controls">
+<button class="green" type="button" onclick="startTimer()"><span class="button-icon" aria-hidden="true">▶</span>Bắt đầu</button>
+<button class="orange" type="button" onclick="pauseTimer()"><span class="button-icon" aria-hidden="true">⏸</span>Tạm dừng</button>
+<button class="red" type="button" onclick="stopTimer()"><span class="button-icon" aria-hidden="true">■</span>Dừng</button>
+<button class="primary" type="button" onclick="resumeTimer()"><span class="button-icon" aria-hidden="true">↻</span>Tiếp tục</button>
+</div>
+
+<div class="status" id="status">Sẵn sàng</div>
+
+<div class="message-settings">
+  <div class="setting-block">
+    <label for="startMessage">Câu đọc khi bắt đầu</label>
+    <div class="input-with-ok">
+      <input id="startMessage" type="text" value="Buổi thiền định bắt đầu">
+      <button class="green ok-button" type="button" onclick="saveMessageSettings();closeKeyboard()">OK</button>
+    </div>
+  </div>
+
+  <div class="setting-block">
+    <label for="endMessage">Câu đọc thêm khi kết thúc</label>
+    <div class="input-with-ok">
+      <input id="endMessage" type="text" value="Buổi thiền kết thúc">
+      <button class="green ok-button" type="button" onclick="saveMessageSettings();closeKeyboard()">OK</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const reminderContainer=document.getElementById('reminders');
+const repeatInput=document.getElementById('repeatCount');
+const voiceNote=document.getElementById('voiceNote');
+const voiceRateInput=document.getElementById('voiceRate');
+const voiceRateValue=document.getElementById('voiceRateValue');
+const startMessageInput=document.getElementById('startMessage');
+const endMessageInput=document.getElementById('endMessage');
+const canSpeak='speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+const introAudio=new Audio('intro.wav');
+introAudio.preload='auto';
+
+let interval=null;
+let elapsed=0;
+let paused=false;
+let totalSeconds=0;
+let reminders=[];
+let voices=[];
+let speechQueue=Promise.resolve();
+let voiceReady=false;
+let speechToken=0;
+let voiceLoadTimer=null;
+let voiceLoadAttempts=0;
+let warmedSpeechEngine=false;
+const defaultStartMessage='Buổi thiền định bắt đầu';
+const defaultEndMessage='Buổi thiền kết thúc';
+let introResolve=null;
+
+function addReminder(value=''){
+ const row=document.createElement('div');
+ row.className='reminder';
+ row.innerHTML=`
+ <input type="number" min="0" step="0.5" placeholder="Số phút" value="${value}" inputmode="decimal" aria-label="Mốc nhắc theo phút">
+ <button class="green ok-button" type="button" onclick="closeKeyboard()">OK</button>
+ <button class="red" type="button" onclick="this.parentElement.remove()">Xóa</button>`;
+ reminderContainer.appendChild(row);
+}
+
+function closeKeyboard(){
+ const activeElement=document.activeElement;
+ if(activeElement && typeof activeElement.blur==='function'){
+   activeElement.blur();
+ }
+ document.body.focus();
+}
+
+function loadSavedSettings(){
+ const savedRepeat=parseInt(readSavedRepeatCount(),10);
+ if(Number.isInteger(savedRepeat)){
+   repeatInput.value=savedRepeat;
+ }
+ const savedStartMessage=readSavedValue('startMessage');
+ const savedEndMessage=readSavedValue('endMessage');
+ const savedVoiceRate=parseFloat(readSavedValue('voiceRate'));
+ if(savedStartMessage) startMessageInput.value=savedStartMessage;
+ if(savedEndMessage) endMessageInput.value=savedEndMessage;
+ if(!Number.isNaN(savedVoiceRate)) voiceRateInput.value=savedVoiceRate;
+ normalizeRepeatCount();
+ updateVoiceRate(false);
+ if(canSpeak) initVoices();
+}
+
+function readSavedRepeatCount(){
+ try{
+   return localStorage.getItem('repeatCount');
+ }catch(error){
+   return null;
+ }
+}
+
+function readSavedValue(key){
+ try{
+   return localStorage.getItem(key);
+ }catch(error){
+   return null;
+ }
+}
+
+function saveSavedValue(key,value){
+ try{
+   localStorage.setItem(key,value);
+ }catch(error){
+   // Trình duyệt vẫn dùng được nếu không cho phép lưu cài đặt.
+ }
+}
+
+function saveRepeatCount(value){
+ try{
+   localStorage.setItem('repeatCount',String(value));
+ }catch(error){
+   // Trình duyệt vẫn dùng được nếu không cho phép lưu cài đặt.
+ }
+}
+
+function normalizeRepeatCount(){
+ let value=parseInt(repeatInput.value,10);
+ if(!Number.isInteger(value)) value=1;
+ value=Math.min(5,Math.max(1,value));
+ repeatInput.value=value;
+ saveRepeatCount(value);
+ return value;
+}
+
+function changeRepeatCount(step){
+ repeatInput.value=normalizeRepeatCount()+step;
+ normalizeRepeatCount();
+}
+
+function normalizeVoiceRate(){
+ let value=parseFloat(voiceRateInput.value);
+ if(Number.isNaN(value)) value=.82;
+ value=Math.min(1.5,Math.max(.2,value));
+ voiceRateInput.value=value.toFixed(2);
+ return value;
+}
+
+function updateVoiceRate(save=true){
+ const value=normalizeVoiceRate();
+ voiceRateValue.innerText=`${value.toFixed(2)}x`;
+ if(save) saveSavedValue('voiceRate',String(value));
+ return value;
+}
+
+function getVoiceRate(){
+ return normalizeVoiceRate();
+}
+
+function saveMessageSettings(){
+ saveSavedValue('startMessage',startMessageInput.value.trim() || defaultStartMessage);
+ saveSavedValue('endMessage',endMessageInput.value.trim() || defaultEndMessage);
+}
+
+function getStartMessage(){
+ return startMessageInput.value.trim() || defaultStartMessage;
+}
+
+function getEndMessage(){
+ const totalMinutes=document.getElementById('totalTime').value;
+ const endMessage=endMessageInput.value.trim() || defaultEndMessage;
+ return `Đã đủ ${totalMinutes} phút. ${endMessage}`;
+}
+
+function initVoices(){
+ if(!canSpeak){
+   voiceNote.innerText='Trình duyệt này không hỗ trợ đọc giọng nói. Hãy thử mở bằng Chrome, Edge hoặc Safari bản mới.';
+   return false;
+ }
+
+ voices=window.speechSynthesis.getVoices();
+ if(voices.length){
+   voiceReady=true;
+   voiceNote.innerText='Giọng nói đã sẵn sàng. Trình duyệt sẽ tự dùng giọng mặc định phù hợp nhất.';
+   if(voiceLoadTimer){
+     clearInterval(voiceLoadTimer);
+     voiceLoadTimer=null;
+   }
+   return true;
+ }
+
+ voiceNote.innerText='Đang tải thư viện giọng nói. Trang sẽ tự chuẩn bị sẵn để khi bấm nghe thử hoặc bắt đầu sẽ nhanh hơn.';
+ return false;
+}
+
+function preloadVoiceLibrary(){
+ if(!canSpeak){
+   initVoices();
+   return;
+ }
+
+ initVoices();
+ warmUpSpeechEngine();
+ if(voiceLoadTimer) clearInterval(voiceLoadTimer);
+ voiceLoadAttempts=0;
+
+ voiceLoadTimer=setInterval(()=>{
+   voiceLoadAttempts++;
+   const loaded=initVoices();
+   if(loaded || voiceLoadAttempts>=20){
+     clearInterval(voiceLoadTimer);
+     voiceLoadTimer=null;
+   }
+ },250);
+}
+
+function warmUpSpeechEngine(){
+ if(warmedSpeechEngine || !canSpeak) return;
+ warmedSpeechEngine=true;
+
+ try{
+   const utterance=new SpeechSynthesisUtterance(' ');
+   utterance.lang='vi-VN';
+   utterance.volume=0;
+   utterance.rate=1;
+   window.speechSynthesis.speak(utterance);
+   setTimeout(()=>{
+     if(window.speechSynthesis.pending || window.speechSynthesis.speaking){
+       window.speechSynthesis.cancel();
+     }
+     initVoices();
+   },80);
+ }catch(error){
+   initVoices();
+ }
+}
+
+if(canSpeak){
+ window.speechSynthesis.onvoiceschanged=initVoices;
+ window.addEventListener('DOMContentLoaded',preloadVoiceLibrary);
+ window.addEventListener('DOMContentLoaded',preloadIntroAudio);
+ window.addEventListener('load',preloadVoiceLibrary);
+ window.addEventListener('load',preloadIntroAudio);
+ preloadVoiceLibrary();
+ preloadIntroAudio();
+}else{
+ initVoices();
+}
+
+function preloadIntroAudio(){
+ try{
+   introAudio.load();
+ }catch(error){
+   // Nếu trình duyệt không cho preload audio, lời nhắc vẫn đọc bình thường.
+ }
+}
+
+function playIntro(){
+ return new Promise(resolve=>{
+   let done=false;
+   let fallbackTimer=null;
+
+   const finish=()=>{
+     if(done) return;
+     done=true;
+     clearTimeout(fallbackTimer);
+     introAudio.removeEventListener('ended',finish);
+     introAudio.removeEventListener('error',finish);
+     introResolve=null;
+     resolve();
+   };
+
+   try{
+     introResolve=finish;
+     introAudio.pause();
+     introAudio.currentTime=0;
+     introAudio.volume=1;
+     introAudio.addEventListener('ended',finish);
+     introAudio.addEventListener('error',finish);
+     fallbackTimer=setTimeout(finish,20000);
+
+     const playPromise=introAudio.play();
+     if(playPromise && typeof playPromise.catch==='function'){
+       playPromise.catch(finish);
+     }
+   }catch(error){
+     finish();
+   }
+ });
+}
+
+async function speakOnce(text,playIntroFirst=false){
+ if(!canSpeak){
+   return;
+ }
+
+ if(playIntroFirst){
+   await playIntro();
+ }
+
+ return new Promise(resolve=>{
+   initVoices();
+   const utterance=new SpeechSynthesisUtterance(text);
+   utterance.lang='vi-VN';
+   utterance.rate=getVoiceRate();
+   utterance.pitch=1;
+   utterance.volume=1;
+
+   utterance.onend=resolve;
+   utterance.onerror=resolve;
+   window.speechSynthesis.speak(utterance);
+
+   // Một số bản Safari cần resume sau thao tác bấm để bắt đầu hàng đợi nói.
+   if(typeof window.speechSynthesis.resume==='function'){
+     window.speechSynthesis.resume();
+   }
+
+   setTimeout(resolve,12000);
+ });
+}
+
+function speak(text,repeat=1){
+ const count=Math.max(1,Math.min(5,parseInt(repeat,10)||1));
+ const token=speechToken;
+ speechQueue=speechQueue.then(async()=>{
+   for(let i=0;i<count;i++){
+     if(token!==speechToken) return;
+     await speakOnce(text,i===0);
+     if(token!==speechToken) return;
+     if(i<count-1) await wait(450);
+   }
+ });
+ return speechQueue;
+}
+
+function cancelSpeech(){
+ speechToken++;
+ if(canSpeak) window.speechSynthesis.cancel();
+ try{
+   introAudio.pause();
+   introAudio.currentTime=0;
+ }catch(error){
+   // Nếu audio chưa sẵn sàng, vẫn hủy hàng đợi giọng nói bình thường.
+ }
+ if(introResolve){
+   introResolve();
+   introResolve=null;
+ }
+ speechQueue=Promise.resolve();
+}
+
+function wait(ms){
+ return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
+function testVoice(){
+ if(!canSpeak){
+   alert('Trình duyệt này không hỗ trợ đọc giọng nói. Hãy thử Chrome, Edge hoặc Safari bản mới.');
+   return;
+ }
+
+ initVoices();
+ cancelSpeech();
+ speak('Đây là giọng nói được dùng trong buổi thiền.');
+ voiceNote.innerText=voiceReady
+   ? 'Đã bật giọng nói. Bạn có thể bấm Bắt đầu.'
+   : 'Đã yêu cầu bật giọng nói. Nếu chưa nghe thấy, hãy bấm lại nút này hoặc kiểm tra âm lượng.';
+}
+
+function getRepeatCount(){
+ return normalizeRepeatCount();
+}
+
+addReminder(15);
+loadSavedSettings();
+
+function startTimer(){
+
+ stopTimer(false);
+
+ const totalMinutes=parseFloat(document.getElementById('totalTime').value);
+
+ if(!totalMinutes || totalMinutes<=0){
+   alert('Nhập tổng thời gian hợp lệ');
+   return;
+ }
+
+ totalSeconds=Math.round(totalMinutes*60);
+
+ reminders=[];
+
+ document.querySelectorAll('.reminder input').forEach(inp=>{
+   const v=parseFloat(inp.value);
+   if(v>0 && v<totalMinutes){
+      reminders.push({
+        minute:v,
+        second:Math.round(v*60),
+        spoken:false
+      });
+   }
+ });
+
+ reminders.sort((a,b)=>a.second-b.second);
+
+ elapsed=0;
+ paused=false;
+ cancelSpeech();
+
+ speak(getStartMessage());
+
+ document.getElementById('status').innerText='Đang thiền';
+
+ interval=setInterval(runTimer,1000);
+ updateDisplay();
+}
+
+function runTimer(){
+
+ if(paused) return;
+
+ elapsed++;
+
+ reminders.forEach(r=>{
+   if(!r.spoken && elapsed>=r.second){
+      speak(`Đã qua ${r.minute} phút`,getRepeatCount());
+      r.spoken=true;
+   }
+ });
+
+ if(elapsed>=totalSeconds){
+    speak(getEndMessage(),getRepeatCount());
+    stopTimer(false);
+    document.getElementById('status').innerText='Hoàn thành';
+    return;
+ }
+
+ updateDisplay();
+}
+
+function pauseTimer(){
+ if(!interval) return;
+ paused=true;
+ document.getElementById('status').innerText='Tạm dừng';
+}
+
+function resumeTimer(){
+ if(!interval) return;
+ paused=false;
+ if(canSpeak && typeof window.speechSynthesis.resume==='function'){
+   window.speechSynthesis.resume();
+ }
+ document.getElementById('status').innerText='Tiếp tục';
+}
+
+function stopTimer(reset=true){
+ clearInterval(interval);
+ interval=null;
+
+ if(reset){
+   elapsed=0;
+   cancelSpeech();
+   updateDisplay();
+ }
+
+ document.getElementById('bar').style.width='0%';
+ document.getElementById('status').innerText='Đã dừng';
+}
+
+function updateDisplay(){
+
+ let h=Math.floor(elapsed/3600);
+ let m=Math.floor((elapsed%3600)/60);
+ let s=elapsed%60;
+
+ document.getElementById('timer').innerText=
+ `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+
+ let percent=totalSeconds?Math.min(100,elapsed/totalSeconds*100):0;
+
+ document.getElementById('bar').style.width=percent+'%';
+
+ document.getElementById('info').innerHTML=
+ `Đã qua: ${(elapsed/60).toFixed(1)} phút<br>
+ Còn lại: ${Math.max(0,((totalSeconds-elapsed)/60)).toFixed(1)} phút`;
+}
+</script>
+</body>
+</html>
