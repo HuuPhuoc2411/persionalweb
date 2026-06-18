@@ -114,4 +114,18 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+
+        <loc>https://huuphuoc.cloud/VN_LCD/index.html</loc>
+        <lastmod>2026-06-16</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+
+        <loc>https://huuphuoc.cloud/vn_voice/index.html</loc>
+        <lastmod>2026-06-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>
