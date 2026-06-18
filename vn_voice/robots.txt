@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://audio-to-arduino.pages.dev/sitemap.xml

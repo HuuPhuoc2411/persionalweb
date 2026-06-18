@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#081018">
+
+  <title>Chuyển đổi file âm thanh sang mã Arduino | Audio to Arduino Converter</title>
+  <meta name="description" content="Chuyển đổi file âm thanh sang mã Arduino, tạo audio_data.h từ MP3, WAV, OGG ngay trong trình duyệt. Hỗ trợ Arduino, ESP32 và ESP8266.">
+  <meta name="keywords" content="chuyển đổi file âm thanh sang mã Arduino, chuyen doi file am thanh sang ma Arduino, audio to Arduino converter, MP3 to Arduino code, WAV to Arduino code, audio_data.h, PROGMEM audio, Arduino audio converter, ESP32 audio converter">
+  <meta name="author" content="Audio to Arduino Header Converter">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="application-name" content="Audio to Arduino Header Converter">
+  <meta name="language" content="Vietnamese, English">
+  <link rel="canonical" href="https://audio-to-arduino.pages.dev/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Audio to Arduino Header Converter">
+  <meta property="og:title" content="Chuyển đổi file âm thanh sang mã Arduino">
+  <meta property="og:description" content="Tạo mã Arduino từ file âm thanh MP3, WAV, OGG bằng audio_data.h ngay trong trình duyệt. Có kiểm tra dung lượng cho Arduino, ESP32 và ESP8266.">
+  <meta property="og:url" content="https://audio-to-arduino.pages.dev/">
+  <meta property="og:image" content="https://audio-to-arduino.pages.dev/assets/icons/social-card.svg">
+  <meta property="og:image:alt" content="Chuyển đổi file âm thanh sang mã Arduino">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chuyển đổi file âm thanh sang mã Arduino">
+  <meta name="twitter:description" content="Tạo audio_data.h từ MP3, WAV, OGG cho Arduino, ESP32 và ESP8266 ngay trong trình duyệt.">
+  <meta name="twitter:image" content="https://audio-to-arduino.pages.dev/assets/icons/social-card.svg">
+
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preload" href="assets/css/styles.css" as="style">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/app.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Audio to Arduino Header Converter",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "url": "https://audio-to-arduino.pages.dev/",
+    "description": "Chuyển đổi file âm thanh sang mã Arduino và tạo audio_data.h từ MP3, WAV, OGG ngay trong trình duyệt.",
+    "keywords": "chuyển đổi file âm thanh sang mã Arduino, audio to Arduino converter, MP3 to Arduino code, audio_data.h, PROGMEM audio",
+    "inLanguage": ["vi", "en"],
+    "softwareHelp": "https://audio-to-arduino.pages.dev/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Chuyển đổi file âm thanh sang mã Arduino",
+      "Tạo file audio_data.h từ MP3, WAV và OGG",
+      "Convert multiple audio files to Arduino PROGMEM header data",
+      "Generate named audio clips for Arduino playback",
+      "Estimate memory fit for Arduino Uno, Nano, Mega, ESP8266, and ESP32"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="eyebrow">Browser audio tool</p>
+        <h1 data-i18n="title">Audio to Arduino Header Converter</h1>
+        <p class="intro" data-i18n-html="intro">Convert audio files into <code>audio_data.h</code> for playback on Arduino, ESP32, or ESP8266.</p>
+      </div>
+      <button class="language-toggle" id="languageToggle" type="button" aria-pressed="false" aria-label="Switch to Vietnamese">
+        <span class="language-toggle__label" data-i18n="languageButton">Switch language</span>
+        <span class="language-switch" aria-hidden="true">
+          <span class="language-switch__option">EN</span>
+          <span class="language-switch__option">VI</span>
+          <span class="language-switch__thumb"></span>
+        </span>
+      </button>
+    </header>
+
+    <div class="workspace">
+      <section class="panel" aria-labelledby="input-title">
+        <h2 id="input-title" data-i18n="uploadTitle">Upload audio files</h2>
+        <div class="upload-zone" id="uploadZone">
+          <label for="audioFiles" data-i18n="uploadLabel">Choose one or more MP3, WAV, or OGG files</label>
+          <p class="drop-hint" data-i18n="dropHint">Drag and drop audio files here, or use the button below.</p>
+          <input class="file-input" id="audioFiles" type="file" accept="audio/*" multiple>
+          <label class="file-picker" for="audioFiles" data-i18n="filePickerButton">Choose audio files</label>
+          <p class="file-selection" id="fileSelection" data-i18n="noFileSelected">No files selected</p>
+        </div>
+
+        <div class="quality-panel" aria-labelledby="quality-title">
+          <h3 id="quality-title" data-i18n="qualityTitle">Audio quality</h3>
+          <p class="quality-note" data-i18n="qualityNote">Higher sample rates sound clearer, but they use more memory. PWM output is cleaner than direct speaker mode.</p>
+          <div class="sample-rate-options" role="radiogroup" aria-label="Audio sample rate" data-i18n-attr="aria-label:sampleRateGroupLabel">
+            <label class="sample-rate-option">
+              <input type="radio" name="sampleRate" value="8000" checked>
+              <span>
+                <strong>8 kHz</strong>
+                <small data-i18n="rate8000">Smallest file</small>
+              </span>
+            </label>
+            <label class="sample-rate-option">
+              <input type="radio" name="sampleRate" value="11025">
+              <span>
+                <strong>11.025 kHz</strong>
+                <small data-i18n="rate11025">Better speech</small>
+              </span>
+            </label>
+            <label class="sample-rate-option">
+              <input type="radio" name="sampleRate" value="16000">
+              <span>
+                <strong>16 kHz</strong>
+                <small data-i18n="rate16000">Clearer audio</small>
+              </span>
+            </label>
+            <label class="sample-rate-option">
+              <input type="radio" name="sampleRate" value="22050">
+              <span>
+                <strong>22.05 kHz</strong>
+                <small data-i18n="rate22050">Best quality</small>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="convert-button" id="convertButton" type="button" data-i18n="convertButton">Create .h file</button>
+          <a class="download download-button" id="downloadLink" aria-disabled="true" download="audio_data.h">
+            <span class="download-icon" aria-hidden="true"></span>
+            <span data-i18n="downloadButton">Download audio_data.h</span>
+          </a>
+          <button id="clearButton" class="secondary" type="button" data-i18n="clearButton">Clear</button>
+        </div>
+
+        <p class="note" data-i18n-html="fileNameNote">Valid file names: <code>hello_world.mp3</code>, <code>alarm_1.wav</code>, <code>start_sound.ogg</code>.</p>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="memory-title">
+        <h2 id="memory-title" data-i18n="memoryTitle">Memory estimate</h2>
+        <div class="summary">
+          <div class="metric">
+            <span data-i18n="clipCountLabel">Clips</span>
+            <strong id="clipCount">0</strong>
+          </div>
+          <div class="metric">
+            <span data-i18n="audioBytesLabel">Audio data</span>
+            <strong id="audioBytes">0 B</strong>
+          </div>
+          <div class="metric">
+            <span data-i18n="headerBytesLabel">Header file</span>
+            <strong id="headerBytes">0 B</strong>
+          </div>
+        </div>
+        <p class="memory-note" data-i18n-html="memoryNote">This estimate includes all clips. Define only the clips you use and the sketch will be smaller.</p>
+
+        <div class="table-wrap">
+          <table aria-label="Board memory estimate" data-i18n-attr="aria-label:boardTableLabel">
+            <thead>
+              <tr>
+                <th data-i18n="boardColumn">Board</th>
+                <th data-i18n="budgetColumn">Audio budget</th>
+                <th data-i18n="resultColumn">Result</th>
+              </tr>
+            </thead>
+            <tbody id="boardRows"></tbody>
+          </table>
+        </div>
+
+        <div class="clip-list">
+          <h2 data-i18n="clipListTitle">Clip list</h2>
+          <div class="table-wrap">
+            <table aria-label="Audio clip list" data-i18n-attr="aria-label:clipTableLabel">
+              <thead>
+                <tr>
+                  <th data-i18n="clipNameColumn">Clip name</th>
+                  <th data-i18n="durationColumn">Duration</th>
+                  <th data-i18n="dataColumn">Data</th>
+                </tr>
+              </thead>
+              <tbody id="clipRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <noscript>
+    <div class="noscript">JavaScript is required to convert audio in the browser.</div>
+  </noscript>
+</body>
+</html>
