@@ -1,0 +1,19 @@
+{
+  "name": "VN_LCD - Thư viện Arduino LCD tiếng Việt",
+  "short_name": "VN_LCD",
+  "description": "Thư viện Arduino giúp in chữ tiếng Việt có dấu trên LCD 16x2 I2C HD44780 PCF8574.",
+  "lang": "vi-VN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#202c29",
+  "theme_color": "#202c29",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

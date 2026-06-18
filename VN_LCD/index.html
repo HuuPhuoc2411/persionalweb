@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VN_LCD - Thư viện Arduino LCD tiếng Việt | In chữ tiếng Việt trên LCD 16x2</title>
+    <meta name="description" content="VN_LCD là thư viện Arduino LCD tiếng Việt giúp in chữ tiếng Việt có dấu trên LCD 16x2 I2C HD44780 PCF8574 trực tiếp bằng lcd.print() từ chuỗi UTF-8.">
+    <meta name="keywords" content="thư viện arduino LCD tiếng việt, in chữ tiếng Việt trên LCD bằng arduino, VN_LCD, Arduino LCD tiếng Việt, LCD 16x2 tiếng Việt, HD44780 tiếng Việt, PCF8574, lcd.print tiếng Việt, thư viện LCD I2C Arduino">
+    <meta name="author" content="Huu-Phuoc Nguyen">
+    <meta name="creator" content="Huu-Phuoc Nguyen">
+    <meta name="publisher" content="HuuPhuoc2411">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="theme-color" content="#202c29">
+    <meta name="color-scheme" content="dark">
+    <meta name="application-name" content="VN_LCD">
+    <meta name="apple-mobile-web-app-title" content="VN_LCD">
+    <link rel="canonical" href="https://vn-lcd.pages.dev/">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="preload" as="image" href="assets/lcd-vietnamese.jpg">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="VN_LCD">
+    <meta property="og:title" content="VN_LCD - Thư viện Arduino LCD tiếng Việt">
+    <meta property="og:description" content="In chữ tiếng Việt có dấu trên LCD 16x2 bằng Arduino, ESP8266 hoặc ESP32 qua lcd.print() và chuỗi UTF-8.">
+    <meta property="og:url" content="https://vn-lcd.pages.dev/">
+    <meta property="og:image" content="https://vn-lcd.pages.dev/assets/lcd-vietnamese.jpg">
+    <meta property="og:image:alt" content="LCD 16x2 hiển thị chữ tiếng Việt có dấu bằng thư viện VN_LCD">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="898">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VN_LCD - Thư viện Arduino LCD tiếng Việt">
+    <meta name="twitter:description" content="Thư viện Arduino để in chữ tiếng Việt trên LCD 16x2 I2C HD44780 PCF8574 bằng lcd.print().">
+    <meta name="twitter:image" content="https://vn-lcd.pages.dev/assets/lcd-vietnamese.jpg">
+    <meta name="twitter:image:alt" content="LCD 16x2 hiển thị tiếng Việt có dấu">
+
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://vn-lcd.pages.dev/#website",
+            "url": "https://vn-lcd.pages.dev/",
+            "name": "VN_LCD",
+            "inLanguage": "vi-VN",
+            "description": "Trang giới thiệu thư viện Arduino LCD tiếng Việt VN_LCD."
+          },
+          {
+            "@type": "SoftwareSourceCode",
+            "@id": "https://vn-lcd.pages.dev/#software",
+            "name": "VN_LCD",
+            "codeRepository": "https://github.com/HuuPhuoc2411/VN_LCD",
+            "url": "https://vn-lcd.pages.dev/",
+            "license": "https://github.com/HuuPhuoc2411/VN_LCD/blob/HEAD/LICENSE",
+            "programmingLanguage": ["C++", "Arduino"],
+            "runtimePlatform": ["Arduino AVR", "ESP8266", "ESP32"],
+            "applicationCategory": "DeveloperApplication",
+            "keywords": "thư viện arduino LCD tiếng việt, in chữ tiếng Việt trên LCD bằng arduino, LCD 16x2 I2C, HD44780, PCF8574, VN_LCD",
+            "description": "VN_LCD là thư viện Arduino cho LCD 16x2 I2C HD44780 PCF8574, hỗ trợ in tiếng Việt UTF-8 có dấu trực tiếp bằng lcd.print().",
+            "author": {
+              "@type": "Person",
+              "name": "Huu-Phuoc Nguyen",
+              "email": "mailto:huuphuoc.research@gmail.com",
+              "url": "https://github.com/HuuPhuoc2411"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://vn-lcd.pages.dev/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "VN_LCD dùng để làm gì?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "VN_LCD giúp Arduino, ESP8266 và ESP32 in chữ tiếng Việt có dấu trên LCD 16x2 I2C HD44780 PCF8574 trực tiếp từ chuỗi UTF-8 bằng lcd.print()."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Có cần tách dấu tiếng Việt trước khi in lên LCD không?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Không cần. Bạn có thể gõ chuỗi tiếng Việt UTF-8 trực tiếp trong Arduino IDE hoặc VS Code, sau đó gọi lcd.print()."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "VN_LCD có hỗ trợ ESP8266 và ESP32 không?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Có. Thư viện hỗ trợ Arduino AVR, ESP8266 và ESP32, đồng thời cho phép cấu hình chân SDA/SCL tùy chỉnh bằng I2C mềm."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Bỏ qua phần điều hướng</a>
+
+    <header class="site-header" aria-label="Điều hướng chính">
+      <nav class="nav">
+        <a class="brand" href="#top" aria-label="VN_LCD trang chủ">
+          <span class="brand-mark" aria-hidden="true">VN</span>
+          <span class="brand-text">VN_LCD</span>
+        </a>
+        <div class="nav-links" aria-label="Liên kết trong trang">
+          <a href="#features">Tính năng</a>
+          <a href="#install">Cài đặt</a>
+          <a href="#usage">Cách dùng</a>
+          <a href="#gallery">Ảnh thật</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <a class="nav-action" href="https://github.com/HuuPhuoc2411/VN_LCD" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-media" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-content">
+          <div class="arduino-badge" aria-label="Thư viện dành cho Arduino">
+            <img src="assets/Arduino-Logo.webp" alt="Arduino logo" width="160" height="110">
+            <span>Thư viện cho Arduino</span>
+          </div>
+          <p class="eyebrow">Arduino Library / LCD 16x2 I2C / Tiếng Việt UTF-8</p>
+          <h1 id="hero-title" class="glow-title">Thư viện VN_LCD</h1>
+          <p class="hero-lead">
+            Thư viện Arduino LCD tiếng Việt để in chữ tiếng Việt trên LCD bằng Arduino,
+            ESP8266 hoặc ESP32. Gõ chuỗi UTF-8 có dấu, gọi <code>lcd.print()</code>,
+            và để VN_LCD tự dựng glyph phù hợp với ô ký tự 5x8 của HD44780.
+          </p>
+          <div class="hero-actions" aria-label="Liên kết nhanh">
+            <a class="button button-primary" href="https://github.com/HuuPhuoc2411/VN_LCD" target="_blank" rel="noopener">
+              <span aria-hidden="true">GH</span>
+              Mở GitHub
+            </a>
+            <a class="button button-secondary" href="https://github.com/HuuPhuoc2411/VN_LCD/archive/refs/heads/main.zip">
+              <span aria-hidden="true">ZIP</span>
+              Tải thư viện
+            </a>
+            <a class="button button-ghost" href="#usage">
+              <span aria-hidden="true">#</span>
+              Xem ví dụ
+            </a>
+          </div>
+          <div class="lcd-preview" aria-label="Mô phỏng nội dung LCD">
+            <span class="lcd-line" data-lcd-line>xin chào Việt Nam</span>
+            <span class="lcd-line lcd-line-dim">nhiệt độ: 25.5 0C</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="quick-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Tổng quan nhanh</p>
+          <h2 id="quick-title">VN_LCD dành cho LCD 16x2 I2C cần hiển thị tiếng Việt có dấu.</h2>
+          <p>
+            Thư viện nhận chuỗi UTF-8 trực tiếp từ code Arduino, dựng glyph tiếng Việt trong giới hạn
+            phần cứng của HD44780, và vẫn giữ cách dùng quen thuộc như <code>lcd.print()</code>,
+            <code>setCursor()</code>, <code>clear()</code>, <code>backlight()</code>.
+          </p>
+          <ul class="readme-list">
+            <li><strong>Chuỗi UTF-8:</strong> in tiếng Việt có dấu trực tiếp, không cần tự tách dấu.</li>
+            <li><strong>LCD hỗ trợ:</strong> LCD 16x2 HD44780 dùng module I2C PCF8574.</li>
+            <li><strong>Board hỗ trợ:</strong> Arduino Uno, Nano, Mega, ESP8266 và ESP32.</li>
+            <li><strong>I2C linh hoạt:</strong> dùng I2C mặc định hoặc tự chọn SDA/SCL bằng I2C mềm.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section gallery-section" id="gallery" aria-labelledby="gallery-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Ảnh thực tế</p>
+          <h2 id="gallery-title">LCD 16x2 đang hiển thị tiếng Việt từ thư viện VN_LCD.</h2>
+          <p>
+            Các ảnh dưới đây là kết quả chạy thật trên LCD I2C. Ảnh được giữ đúng tỉ lệ gốc để người xem
+            thấy rõ màn hình, dây nối và module PCF8574.
+          </p>
+          <div class="gallery-grid">
+            <figure>
+              <img src="assets/lcd-vietnamese.jpg" alt="LCD hiển thị tiếng Việt có dấu bằng thư viện VN_LCD" loading="eager" width="1280" height="898">
+              <figcaption>Chuỗi tiếng Việt có dấu trên LCD 16x2.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/lcd-temperature.jpg" alt="LCD hiển thị nhiệt độ tiếng Việt với ký tự độ C" loading="eager" width="1280" height="899">
+              <figcaption>Hiển thị nhiệt độ và ký tự độ C gọn.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/lcd-diacritics.jpg" alt="LCD hiển thị nhiều ký tự tiếng Việt có dấu" loading="lazy" width="1280" height="899">
+              <figcaption>Nhiều dấu tiếng Việt trong giới hạn CGRAM.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/lcd-hello.jpg" alt="LCD in chữ xin chào Việt Nam bằng Arduino" loading="lazy" width="1280" height="899">
+              <figcaption>Thông điệp “xin chào Việt Nam”.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section intro" aria-labelledby="intro-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Vấn đề mà VN_LCD giải quyết</p>
+          <h2 id="intro-title">LCD 16x2 không biết Unicode. VN_LCD đứng giữa để dịch tiếng Việt thành glyph dễ đọc.</h2>
+          <p>
+            LCD ký tự HD44780 chỉ có ô 5x8 pixel và 8 ô CGRAM cho ký tự tùy chỉnh, nên việc hiển thị đủ
+            dấu tiếng Việt không thể làm giống màn hình đồ họa. VN_LCD chọn hướng thực dụng: nhận chuỗi
+            tiếng Việt UTF-8, chuẩn hóa ký tự, tạo glyph cần thiết và ưu tiên độ rõ nét khi hiển thị trên
+            LCD 16x2.
+          </p>
+          <p>
+            Nếu bạn đang tìm <strong>thư viện arduino LCD tiếng việt</strong> hoặc cách
+            <strong>in chữ tiếng Việt trên LCD bằng arduino</strong>, đây là thư viện tập trung đúng vào
+            nhu cầu đó.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="features" aria-labelledby="features-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Tính năng chính</p>
+          <h2 id="features-title">Nhỏ gọn cho dự án Arduino, nhưng xử lý đúng những chỗ LCD hay gây khó chịu.</h2>
+          <ul class="readme-list">
+            <li><strong>In tiếng Việt bằng <code>lcd.print()</code>:</strong> gõ chuỗi UTF-8 trong Arduino IDE hoặc VS Code rồi in trực tiếp.</li>
+            <li><strong>Tự tạo glyph trong giới hạn 5x8:</strong> thư viện dựng ký tự tiếng Việt phù hợp CGRAM của HD44780.</li>
+            <li><strong>I2C mềm và chân tùy chỉnh:</strong> dùng <code>lcd.begin(sdaPin, sclPin)</code> khi chân I2C mặc định đã được dùng.</li>
+            <li><strong>Tự quét địa chỉ I2C:</strong> <code>beginWithScan()</code> giúp tìm địa chỉ module LCD khi bạn chưa chắc là <code>0x27</code> hay <code>0x3F</code>.</li>
+            <li><strong>Xóa vùng nhỏ, ít chớp LCD:</strong> <code>lcd.clear(column, row, length)</code> cập nhật số liệu mà không cần xóa toàn bộ màn hình.</li>
+            <li><strong>Ký tự độ C và độ F gọn:</strong> chuỗi <code>0C</code> và <code>0F</code> được chuyển thành ký tự nhiệt độ trong một ô LCD.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="install" aria-labelledby="install-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Cài đặt</p>
+          <h2 id="install-title">Dùng qua Arduino IDE Library Manager hoặc tải trực tiếp từ GitHub.</h2>
+          <ol class="readme-list">
+            <li><strong>Arduino Library Manager:</strong> mở Arduino IDE, vào Library Manager, tìm <code>VN_LCD</code> và cài đặt khi thư viện đã được xuất bản.</li>
+            <li><strong>Add .ZIP Library:</strong> tải ZIP từ GitHub, chọn <strong>Sketch</strong> -> <strong>Include Library</strong> -> <strong>Add .ZIP Library...</strong>.</li>
+            <li><strong>Cài thủ công:</strong> chép thư mục <code>VN_LCD</code> vào <code>Documents/Arduino/libraries/VN_LCD</code>, rồi mở lại Arduino IDE.</li>
+          </ol>
+          <div class="link-panel" aria-label="Liên kết dự án">
+            <a class="button button-primary" href="https://github.com/HuuPhuoc2411/VN_LCD" target="_blank" rel="noopener">GitHub Repository</a>
+            <a class="button button-secondary" href="https://github.com/HuuPhuoc2411/VN_LCD/tree/HEAD/examples/Vietnamese16x2" target="_blank" rel="noopener">Ví dụ Vietnamese16x2</a>
+            <a class="button button-secondary" href="https://downloads.arduino.cc/libraries/logs/github.com/HuuPhuoc2411/VN_LCD/" target="_blank" rel="noopener">Arduino Library Logs</a>
+            <a class="button button-ghost" href="https://github.com/HuuPhuoc2411/VN_LCD/issues" target="_blank" rel="noopener">Báo lỗi / góp ý</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="usage" aria-labelledby="usage-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Cách dùng nhanh</p>
+          <h2 id="usage-title">Một đoạn code đủ để in “nhiệt độ” có dấu lên LCD 16x2.</h2>
+          <p>
+            Ví dụ này dùng chân SDA = 7, SCL = 6 và <code>beginWithScan()</code> để tự tìm địa chỉ I2C.
+            Khi cập nhật số liệu, <code>clear(10, 0, 5)</code> chỉ xóa vùng giá trị nhiệt độ.
+          </p>
+          <div class="code-shell">
+            <div class="code-toolbar">
+              <span>Vietnamese16x2.ino</span>
+              <button class="copy-button" type="button" data-copy-code>Copy</button>
+            </div>
+            <pre><code data-code>#include "VN_LCD.h"
+
+VN_LCD lcd(0x27, 16, 2);
+
+void setup() {
+  Serial.begin(115200);
+
+  if (!lcd.beginWithScan(7, 6, Serial)) {
+    return;
+  }
+
+  lcd.backlight();
+  lcd.clear();
+}
+
+void loop() {
+  lcd.setCursor(0, 0);
+  lcd.print("nhiệt độ:");
+
+  lcd.setCursor(10, 0);
+  lcd.print(25.5, 1);
+  lcd.print("0C");
+
+  delay(1000);
+  lcd.clear(10, 0, 5);
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="hardware-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Phần cứng hỗ trợ</p>
+          <h2 id="hardware-title">Tối ưu cho module LCD I2C phổ biến ngoài thị trường.</h2>
+          <p>
+            VN_LCD tự điều khiển HD44780 qua PCF8574, không cần thư viện LCD ngoài.
+            Thư viện phù hợp cho Arduino Uno, Nano, Mega, ESP8266 và ESP32.
+          </p>
+          <table class="readme-table">
+            <tbody>
+              <tr>
+                <th>LCD</th>
+                <td>HD44780 16x2</td>
+              </tr>
+              <tr>
+                <th>I2C backpack</th>
+                <td>PCF8574 / PCF8574A</td>
+              </tr>
+              <tr>
+                <th>Địa chỉ thường gặp</th>
+                <td><code>0x27</code> / <code>0x3F</code></td>
+              </tr>
+              <tr>
+                <th>Board</th>
+                <td>Arduino AVR, ESP8266, ESP32</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="api" aria-labelledby="api-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">API đáng chú ý</p>
+          <h2 id="api-title">Giữ lại cách dùng quen thuộc của LCD, thêm xử lý tiếng Việt ở bên trong.</h2>
+          <table class="readme-table">
+            <tbody>
+              <tr>
+                <th><code>begin()</code></th>
+                <td>Khởi động LCD bằng I2C mặc định.</td>
+              </tr>
+              <tr>
+                <th><code>begin(sdaPin, sclPin)</code></th>
+                <td>Khởi động LCD bằng chân SDA/SCL tùy chỉnh.</td>
+              </tr>
+              <tr>
+                <th><code>beginWithScan(Serial)</code></th>
+                <td>Tự quét địa chỉ I2C nếu địa chỉ ban đầu chưa đúng.</td>
+              </tr>
+              <tr>
+                <th><code>print(text)</code></th>
+                <td>In chữ, số và chuỗi tiếng Việt UTF-8.</td>
+              </tr>
+              <tr>
+                <th><code>clear(column, row, length)</code></th>
+                <td>Xóa một vùng nhỏ để cập nhật nội dung ít chớp hơn.</td>
+              </tr>
+              <tr>
+                <th><code>clearVietnameseCache()</code></th>
+                <td>Làm mới cache ký tự tiếng Việt trong CGRAM.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="faq" aria-labelledby="faq-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Câu hỏi nhanh</p>
+          <h2 id="faq-title">Những điểm nên biết trước khi dùng VN_LCD.</h2>
+          <details open>
+            <summary>VN_LCD có phải font Unicode đầy đủ cho LCD không?</summary>
+            <p>Không. LCD HD44780 có ô 5x8 pixel và chỉ 8 ô CGRAM, nên VN_LCD ưu tiên chữ rõ và gần đúng trong giới hạn phần cứng.</p>
+          </details>
+          <details>
+            <summary>Có cần viết <code>printVietnamese()</code> không?</summary>
+            <p>Không bắt buộc. Bạn có thể dùng <code>lcd.print("xin chào")</code>. Hàm <code>printVietnamese()</code> chỉ giúp code rõ nghĩa hơn nếu bạn muốn.</p>
+          </details>
+          <details>
+            <summary>Tại sao một vài dấu có thể bị giản lược?</summary>
+            <p>Một ký tự như “ấ” vừa cần phần “â” vừa cần dấu sắc. Trong 5x8 pixel, thư viện có thể bỏ bớt dấu thanh để chữ không bị dính.</p>
+          </details>
+          <details>
+            <summary>Nên dùng bao nhiêu ký tự đặc biệt trên một màn hình?</summary>
+            <p>Mỗi màn hình 16x2 nên dùng tối đa khoảng 8 ký tự tiếng Việt đặc biệt khác nhau vì CGRAM chỉ có 8 ô dùng chung cho cả hai hàng.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="cta-title">
+        <div class="section-inner readme-flow">
+          <p class="section-kicker">Mã nguồn mở</p>
+          <h2 id="cta-title">Đưa tiếng Việt lên LCD ký tự mà không phải tự vẽ từng dấu.</h2>
+          <p>Clone repo, mở ví dụ <code>Vietnamese16x2</code>, nối LCD I2C và thử ngay trên board Arduino của bạn.</p>
+          <div class="cta-actions">
+            <a class="button button-primary" href="https://github.com/HuuPhuoc2411/VN_LCD" target="_blank" rel="noopener">Xem mã nguồn</a>
+            <a class="button button-secondary" href="https://github.com/HuuPhuoc2411/VN_LCD/archive/refs/heads/main.zip">Tải ZIP</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p><strong>VN_LCD</strong> - Arduino library by Huu-Phuoc Nguyen.</p>
+        <div class="footer-links">
+          <a href="https://github.com/HuuPhuoc2411/VN_LCD" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://downloads.arduino.cc/libraries/logs/github.com/HuuPhuoc2411/VN_LCD/" target="_blank" rel="noopener">Arduino Logs</a>
+          <a href="https://github.com/HuuPhuoc2411/VN_LCD/blob/HEAD/LICENSE" target="_blank" rel="noopener">License</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

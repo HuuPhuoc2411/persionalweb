@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="VN_LCD">
+  <rect width="64" height="64" rx="8" fill="#06120f"/>
+  <rect x="8" y="14" width="48" height="36" rx="5" fill="#caff3d"/>
+  <rect x="12" y="18" width="40" height="28" rx="3" fill="#102418"/>
+  <text x="32" y="37" fill="#caff3d" text-anchor="middle" font-family="Consolas, monospace" font-size="16" font-weight="900">VN</text>
+  <path d="M11 54h42" stroke="#4ff7d2" stroke-width="3" stroke-linecap="round"/>
+</svg>
