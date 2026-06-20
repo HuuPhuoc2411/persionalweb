@@ -507,7 +507,7 @@ function generateHeader(clips, sampleRate) {
   lines.push("#define AUDIO_DATA_H");
   lines.push("");
   lines.push("#include <Arduino.h>");
-  lines.push('#include "TinyAudioPlayer.h"');
+  lines.push('#include "VN_VOICE.h"');
   lines.push("");
   lines.push("// Audio names:");
   clipEntries.forEach(({ clip }) => {
@@ -584,6 +584,10 @@ function generateHeader(clips, sampleRate) {
     lines.push("");
   }
 
+  lines.push("#if defined(SO_DEM)");
+  lines.push('#include "so_dem.h"');
+  lines.push("#endif");
+  lines.push("");
   lines.push("#endif");
   lines.push("");
 
